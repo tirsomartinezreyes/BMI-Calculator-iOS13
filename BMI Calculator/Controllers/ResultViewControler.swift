@@ -11,8 +11,8 @@ import UIKit
 class ResultViewControler: UIViewController {
     @IBOutlet weak var bmiLabelIBOutlet: UILabel!
     @IBOutlet weak var suggestionLabelIBOutlet: UILabel!
-    var bmiValue = "0.0"
-    var suggestionText = ""
+    @IBOutlet weak var viewIBOutlet: UIView!
+    var appModel:App = App()
     
     @IBAction func onRecalculateButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -20,15 +20,8 @@ class ResultViewControler: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bmiLabelIBOutlet.text = bmiValue
-        let bmiFloatValue = Float(bmiValue)!
-        
-        switch bmiFloatValue {
-            case ..<25: suggestionText = "Eat more snacks"
-            case 25: suggestionText = "You're solid rock!!"
-            default: suggestionText = "I can't believe it"
-        }
-        
-        suggestionLabelIBOutlet.text = suggestionText
+        bmiLabelIBOutlet.text = appModel.getBmiAsString()
+        suggestionLabelIBOutlet.text = appModel.getSuggestion()
+        viewIBOutlet.backgroundColor = appModel.getBgColor()
     }
 }
